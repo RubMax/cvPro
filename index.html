@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>CV Builder Pro - Gerador de Currículos Profissionais</title>
+  <meta name="description" content="Crie currículos profissionais grátis com 6 modelos premium. Visualização em tempo real e exportação PDF." />
+  <meta name="theme-color" content="#1a1a2e" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="CV Builder Pro" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23c9a227'/%3E%3Ctext x='50' y='67' font-size='50' text-anchor='middle' fill='white' font-family='Arial'%3ECV%3C/text%3E%3C/svg%3E" />
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  
+  <!-- html2canvas & jsPDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div id="app">
+
+  <!-- ==================== HEADER ==================== -->
+  <header class="app-header">
+    <div class="header-brand">
+      <div class="brand-icon">
+        <i class="fa-solid fa-file-pen"></i>
+      </div>
+      <div class="brand-text">
+        <span class="brand-name">RubMax CV Builder <span class="gold">Pro</span></span>
+        <span class="brand-sub">Gerador de Currículos Profissionais</span>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button class="btn-header btn-save" onclick="saveData()" title="Salvar dados">
+        <i class="fa-solid fa-floppy-disk"></i>
+        <span>Salvar</span>
+      </button>
+      <button class="btn-header btn-pdf" onclick="exportPDF()" title="Exportar PDF">
+        <i class="fa-solid fa-file-pdf"></i>
+        <span>PDF</span>
+      </button>
+      <button class="btn-header btn-reset" onclick="resetData()" title="Resetar tudo">
+        <i class="fa-solid fa-rotate-left"></i>
+        <span>Reset</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ==================== MAIN LAYOUT ==================== -->
+  <main class="main-layout">
+
+    <!-- ========== LEFT PANEL - FORMULÁRIO ========== -->
+    <aside class="form-panel" id="formPanel">
+      <div class="form-scroll">
+
+       <!-- SEÇÃO 1: MODELOS PREMIUM -->
+<section class="form-section template-section">
+  <button class="template-toggle-btn" onclick="toggleTemplates()">
+    <i class="fa-solid fa-palette"></i> 
+    <span>Modelos Premium</span>
+    <i class="fa-solid fa-chevron-down toggle-icon"></i>
+  </button>
+  
+  <div class="template-grid-wrapper" id="templateGridWrapper">
+    <div class="template-grid">
+      <div class="tpl-card active" data-tpl="1" onclick="selectTemplate(1)">
+        <div class="tpl-preview tpl1-preview">
+          <div class="tpl-bar"></div>
+          <div class="tpl-lines"><span></span><span></span><span></span></div>
+        </div>
+        <span>Corporate Gold</span>
+      </div>
+      <div class="tpl-card" data-tpl="2" onclick="selectTemplate(2)">
+        <div class="tpl-preview tpl2-preview">
+          <div class="tpl-circle"></div>
+          <div class="tpl-lines"><span></span><span></span><span></span></div>
+        </div>
+        <span>LinkedIn Premium</span>
+      </div>
+      <div class="tpl-card" data-tpl="3" onclick="selectTemplate(3)">
+        <div class="tpl-preview tpl3-preview">
+          <div class="tpl-greenbar"></div>
+          <div class="tpl-lines"><span></span><span></span><span></span></div>
+        </div>
+        <span>Clean Print</span>
+      </div>
+      <div class="tpl-card" data-tpl="4" onclick="selectTemplate(4)">
+        <div class="tpl-preview tpl4-preview">
+          <div class="tpl4-accent"></div>
+          <div class="tpl4-lines"><span></span><span></span><span></span></div>
+        </div>
+        <span>Élégance Rouge</span>
+      </div>
+      <div class="tpl-card" data-tpl="5" onclick="selectTemplate(5)">
+        <div class="tpl-preview tpl5-preview">
+          <div class="tpl5-side"></div>
+          <div class="tpl5-lines"><span></span><span></span><span></span></div>
+        </div>
+        <span>Minimaliste Pro</span>
+      </div>
+      <div class="tpl-card" data-tpl="6" onclick="selectTemplate(6)">
+        <div class="tpl-preview tpl6-preview">
+          <div class="tpl6-header"></div>
+          <div class="tpl6-lines"><span></span><span></span><span></span></div>
+        </div>
+        <span>Executive Steel</span>
+      </div>
+      <div class="tpl-card" data-tpl="7" onclick="selectTemplate(7)">
+        <div class="tpl-preview tpl7-preview">
+          <div class="tpl7-topline"></div>
+          <div class="tpl7-lines">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+        <span>Classic B&W</span>
+      </div>
+      <div class="tpl-card" data-tpl="8" onclick="selectTemplate(8)">
+        <div class="tpl-preview tpl8-preview">
+          <div class="tpl8-sidebar"></div>
+          <div class="tpl8-lines">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+        <span>Mono Sidebar</span>
+      </div>
+      <div class="tpl-card" data-tpl="9" onclick="selectTemplate(9)">
+        <div class="tpl-preview tpl9-preview">
+          <div class="tpl9-header"></div>
+          <div class="tpl9-lines">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+        <span>Pure Minimal</span>
+      </div>
+      <div class="tpl-card" data-tpl="10" onclick="selectTemplate(10)">
+  <div class="tpl-preview tpl10-preview">
+    <div class="tpl10-left"></div>
+    <div class="tpl10-lines">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+  <span>Coral Sunset</span>
+</div>
+
+<div class="tpl-card" data-tpl="11" onclick="selectTemplate(11)">
+  <div class="tpl-preview tpl11-preview">
+    <div class="tpl11-top"></div>
+    <div class="tpl11-dot"></div>
+    <div class="tpl11-lines">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+  <span>Ocean Teal</span>
+</div>
+
+<div class="tpl-card" data-tpl="12" onclick="selectTemplate(12)">
+  <div class="tpl-preview tpl12-preview">
+    <div class="tpl12-bg"></div>
+    <div class="tpl12-lines">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+  <span>Sunset Split</span>
+</div>
+    </div>
+  </div>
+</section>
+
+        <!-- SEÇÃO 2: INFORMAÇÕES PESSOAIS -->
+        <section class="form-section">
+          <h3 class="section-title">
+            <i class="fa-solid fa-user"></i> Informações Pessoais
+          </h3>
+
+          <div class="photo-upload-area" onclick="document.getElementById('photoInput').click()">
+            <div id="photoPreview" class="photo-preview">
+              <i class="fa-solid fa-camera"></i>
+              <span>Foto de Perfil</span>
+            </div>
+            <input type="file" id="photoInput" accept="image/jpeg, image/png, image/jpg" onchange="handlePhoto(event)" hidden />
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group full">
+              <label>Nome Completo <span class="required">*</span></label>
+              <input type="text" id="fullName" placeholder="Digite seu nome completo" oninput="updatePreview()" autocomplete="name" />
+            </div>
+            <div class="form-group">
+              <label>Email </label>
+              <input type="email" id="email" placeholder="seu@email.com" oninput="updatePreview()" autocomplete="email" />
+            </div>
+            <!-- Dans la section Informações Pessoais, ajoutez après le champ Email -->
+
+            <div class="form-group">
+              <label>Telefone</label>
+              <input type="text" id="contact1" placeholder="(11) 99999-9999" oninput="updatePreview()" autocomplete="tel" />
+            </div>
+            <div class="form-group">
+              <label>WhatsApp / LinkedIn</label>
+              <input type="text" id="contact2" placeholder="Link ou número" oninput="updatePreview()" />
+            </div>
+            <div class="form-group">
+              <label>Data de Nascimento</label>
+              <input type="date" id="birthDate" oninput="updatePreview()" />
+            </div>
+            <div class="form-group">
+              <label>Nacionalidade</label>
+              <input type="text" id="nationality" placeholder="Brasileiro(a)" oninput="updatePreview()" />
+            </div>
+            <div class="form-group">
+              <label>Estado Civil</label>
+              <select id="maritalStatus" onchange="updatePreview()">
+                <option value="">Selecionar</option>
+                <option>Solteiro(a)</option>
+                <option>Casado(a)</option>
+                <option>Divorciado(a)</option>
+                <option>Viúvo(a)</option>
+                <option>União Estável</option>
+              </select>
+            </div>
+            <div class="form-group full">
+              <label>Endereço Completo</label>
+              <input type="text" id="address" placeholder="Rua, Número, Bairro, Cidade - UF" oninput="updatePreview()" autocomplete="address" />
+            </div>
+          </div>
+        </section>
+
+        <!-- SEÇÃO 3: ÁREA DE INTERESSE -->
+        <section class="form-section">
+          <h3 class="section-title">
+            <i class="fa-solid fa-bullseye"></i> Área de Interesse
+          </h3>
+          <div class="form-group">
+            <textarea id="interest" rows="2" placeholder="Ex: Marketing Digital, Desenvolvimento Web, Vendas..." oninput="updatePreview()">A disposição da empresa</textarea>
+          </div>
+        </section>
+
+        <!-- SEÇÃO 4: ESCOLARIDADE -->
+        <section class="form-section">
+          <h3 class="section-title">
+            <i class="fa-solid fa-graduation-cap"></i> Escolaridade
+          </h3>
+          <div class="form-group">
+            <select id="education" onchange="updatePreview()">
+              <option value="">Selecionar nível de escolaridade</option>
+              <option>Ensino Fundamental Incompleto</option>
+              <option>Ensino Fundamental Completo</option>
+              <option>Ensino Médio Incompleto</option>
+              <option>Ensino Médio Completo</option>
+              <option>Curso Técnico</option>
+              <option>Superior Incompleto</option>
+              <option>Superior Completo</option>
+              <option>Pós-Graduação</option>
+              <option>Mestrado</option>
+              <option>Doutorado</option>
+            </select>
+          </div>
+        </section>
+
+        <!-- SEÇÃO: FORMAÇÃO PROFISSIONAL -->
+          <section class="form-section">
+            <h3 class="section-title">
+              <i class="fa-solid fa-book-open"></i> Formação Profissional
+            </h3>
+            <div id="formacaoList"></div>
+            <button class="btn-add" onclick="addFormacao()" id="addFormacaoBtn">
+              <i class="fa-solid fa-plus"></i> Adicionar formação
+            </button>
+          </section>
+
+        <!-- SEÇÃO 5: HABILIDADES -->
+        <section class="form-section">
+          <h3 class="section-title">
+            <i class="fa-solid fa-star"></i> Habilidades e Competências
+          </h3>
+          <div class="skills-checklist" id="skillsChecklist">
+            <label class="skill-check"><input type="checkbox" value="Comunicação e trabalho em equipe" onchange="updatePreview()" /> Comunicação e trabalho em equipe</label>
+            <label class="skill-check"><input type="checkbox" value="Organização e atenção aos detalhes" onchange="updatePreview()" /> Organização e atenção aos detalhes</label>
+            <label class="skill-check"><input type="checkbox" value="Proatividade e vontade de aprender" onchange="updatePreview()" /> Proatividade e vontade de aprender</label>
+            <label class="skill-check"><input type="checkbox" value="Pontualidade e responsabilidade" onchange="updatePreview()" /> Pontualidade e responsabilidade</label>
+            <label class="skill-check"><input type="checkbox" value="Vontade de aprender e se desenvolver" onchange="updatePreview()" /> Vontade de aprender e se desenvolver</label>
+            <label class="skill-check"><input type="checkbox" value="Atendimento ao cliente" onchange="updatePreview()" /> Atendimento ao cliente</label>
+            <label class="skill-check"><input type="checkbox" value="Informática básica (Pacote Office)" onchange="updatePreview()" /> Informática básica (Pacote Office)</label>
+          </div>
+          <div id="customSkills" class="custom-skills"></div>
+          <button type="button" class="btn-add" onclick="addCustomSkill()">
+            <i class="fa-solid fa-plus"></i> Adicionar habilidade
+          </button>
+        </section>
+
+        <!-- SEÇÃO 6: CARTA DE APRESENTAÇÃO -->
+        <section class="form-section">
+          <h3 class="section-title">
+            <i class="fa-solid fa-envelope-open-text"></i> Carta de Apresentação
+          </h3>
+          <div class="form-group">
+            <textarea id="coverLetter" rows="4" placeholder="Fale sobre você, seus objetivos e motivações..." oninput="updatePreview()">Busco uma oportunidade para aplicar meus conhecimentos, aprender na prática, desenvolver minhas habilidades e crescer profissionalmente em equipe. Tenho facilidade para aprender rapidamente, sou dedicado e comprometido com os resultados.</textarea>
+          </div>
+        </section>
+
+        <!-- SEÇÃO 7: EXPERIÊNCIAS PROFISSIONAIS -->
+        <section class="form-section">
+          <h3 class="section-title">
+            <i class="fa-solid fa-briefcase"></i> Experiências Profissionais
+            <span class="badge-max">Máx. 3</span>
+          </h3>
+          <div id="experiencesList" class="experiences-container"></div>
+          <button type="button" class="btn-add" onclick="addExperience()" id="addExpBtn">
+            <i class="fa-solid fa-plus"></i> Adicionar experiência
+          </button>
+        </section>
+
+        <!-- SEÇÃO 8: IDIOMAS -->
+        <section class="form-section">
+          <h3 class="section-title">
+            <i class="fa-solid fa-language"></i> Idiomas
+          </h3>
+          <div id="languagesList" class="languages-container"></div>
+          <button type="button" class="btn-add" onclick="addLanguage()">
+            <i class="fa-solid fa-plus"></i> Adicionar idioma
+          </button>
+        </section>
+        
+        <div class="form-group">
+  <label>Referência</label>
+  <input type="text" id="reference" placeholder="Nome do contato profissional" oninput="updatePreview()" />
+</div>
+<div class="form-group">
+  <label>Telefone <span class="required">*</span></label>
+  <input type="tel" id="phone" placeholder="(11) 99999-9999" oninput="updatePreview()" autocomplete="tel" />
+</div>
+
+        <!-- SEÇÃO 9: INFORMAÇÕES ADICIONAIS -->
+        <section class="form-section">
+          <h3 class="section-title">
+            <i class="fa-solid fa-circle-info"></i> Informações Adicionais
+          </h3>
+          <div class="form-group">
+            <textarea id="additionalInfo" rows="3" placeholder="Ex: Disponibilidade para viagem, CNH, cursos complementares, portfólio..." oninput="updatePreview()"></textarea>
+          </div>
+        </section>
+
+      </div><!-- form-scroll -->
+    </aside>
+
+    <!-- ========== RIGHT PANEL - PRÉ-VISUALIZAÇÃO ========== -->
+    <div class="preview-panel">
+      <div class="preview-header">
+        <span><i class="fa-solid fa-eye"></i> Visualização em Tempo Real</span>
+        <div class="preview-badge-group">
+          <span class="preview-badge">A4</span>
+          <span class="preview-badge">Preview</span>
+        </div>
+      </div>
+      <div class="preview-wrapper">
+        <div id="cvPreview" class="cv-a4 template-1">
+          <!-- O conteúdo do currículo será renderizado dinamicamente pelo JavaScript -->
+          <div style="display:flex; justify-content:center; align-items:center; height:100%; color:#888;">
+            <i class="fa-solid fa-spinner fa-pulse"></i> Carregando...
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- TOAST NOTIFICATION -->
+<div id="toast" class="toast"></div>
+
+<!-- SCRIPTS -->
+<script src="script.js"></script>
+
+</body>
+</html>
